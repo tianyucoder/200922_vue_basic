@@ -56,16 +56,21 @@
 			})  */
 
 			//data的第二种写法，data是一个函数，返回数据对象 （组件中用的多）
-			/* new Vue({
+			new Vue({
 				el:'#root',
-				data(){ //特别注意：data不要写成箭头函数，要写成普通函数，否则this的指向就是Window了，而不是Vue的实例对象
+				/*  
+					特别注意：
+						1.data若写成函数，Vue会帮我们调用data函数，得到返回的数据对象，this是Vue的实例对象
+						2.data不要写成箭头函数，要写成普通函数，否则this的指向就是Window了
+				*/
+				data(){ 
 					console.log(this)
 					return {
 						msg:'尚硅谷',
 						address:'宏福科技园综合楼'
 					}
 				}
-			})  */
+			}) 
 
 		</script>
 	</body>
