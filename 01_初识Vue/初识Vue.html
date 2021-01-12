@@ -14,8 +14,13 @@
 		<!-- 准备好一个容器 -->
 		<div id="root">
 			<h1>Hello,{{school.name.toUpperCase()}}</h1>
-			<h1>学校坐落在：{{school.name}}</h1>
+			<h1>学校坐落在：{{school.address}}</h1>
 			<h1>我学的是：{{school.subject()}}学科</h1>
+			<h1>{{school.name ? 1:2 }}</h1> <!--可以正常些三元表达式 -->
+
+			<!-- 要注意的地方 -->
+			<h1>{{school.name,school.address}}</h1> <!-- 注意：这样写只展示school.name -->
+			<h1>{{school.name && school.address}}</h1> <!-- 注意：这样写只展示school.address -->
 		</div>
 
 		<script type="text/javascript" >
