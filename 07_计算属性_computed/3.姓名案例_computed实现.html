@@ -20,6 +20,7 @@
 			姓：<input type="text" v-model="firstName"> <br/><br/>
 			名：<input type="text" v-model="lastName"><br/><br/>
 			<span>全名:{{fullName}}</span><br/><br/>
+			<span>全名:{{fullName}}</span><br/><br/>
 			全名: <input type="text" v-model="fullName">
 		</div>
 
@@ -35,7 +36,6 @@
 						1.fullName是谁在调用？---Vue
 						2.fullName什么时候调用？初次渲染会调用、当依赖的属性值发生变化
 					*/
-
 					//简写---相当与只指定了get，没有指定set
 					fullName(){ 
 						console.log('fullName')
@@ -54,7 +54,6 @@
 							return this.firstName + '-' + this.lastName
 						}
 					} */
-					
 				}
 			})
 			
