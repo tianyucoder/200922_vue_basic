@@ -16,12 +16,15 @@
 		-->
 		<!-- 准备好一个容器-->
 		<div id="root">
-			<Hello></Hello>
-			<School></School>
+			<App></App>
 		</div>
 
 		<script type="text/javascript" >
 			Vue.config.productionTip = false //关闭生产提示
+
+			//向Vue的原型对象上追加一个xyz属性，值为1
+			Vue.prototype.xyz = 1
+
 			/* 
 				定义一个School组件：
 					1.如何定义一个组件？-- 使用Vue.extend(options)去创建
@@ -40,30 +43,46 @@
 							(2).Vue.extend调用的返回值是VueComponent构造函数，所以new School其实就是在new VueComponent。
 							(3).所谓组件实例，就是VueComponent创建的实例，简称vc。
 									所有Vue实例，就是Vue创建的实例，简称vm
+							(4).组件的data函数、以及methods中配置的函数中this都是vc
 					6.一个最最最重要的关系：
 							VueComponent继承了Vue，所以Vue.prototype上的属性和方法，vc都能看得见
 			*/
-			
 			const School = Vue.extend({
 				//data中存放组件所需数据
 				data(){ 
+					console.log('@',this)
 					return {
 						name:'尚硅谷',
 						address:'北七家镇-宏福科技园'
 					}
 				},
+				methods: {
+					showAddress(){
+						console.log(this.address)
+					}
+				},
 				//template中配置组件的模板结构
 				template:`
 					<div>
-						<h2>学校名：{{name}}</h2>
-						<h2>学校地址：{{address}}</h2>	
+						<h2 class="title">学校名：{{name}}</h2>
+						<h2 @click="showAddress">学校地址：{{address}}</h2>	
 					</div>
 				`
 			})
-			Vue.prototype.xyz = 1
+			
 			//定义个Hello组件
 			const Hello = Vue.extend({
 				template:`<h2>Hello</h2>`
+			})
+
+			const App = Vue.extend({
+				components:{School,Hello},
+				template:`
+					<div>
+						<Hello/>
+						<School/>
+					</div>
+				`
 			})
 
 			//注册School组件----全局注册
@@ -73,10 +92,7 @@
 			const vm = new Vue({
 				el:'#root',
 				//注册School组件----局部注册----以后工作用的多
-				components:{
-					School,
-					Hello
-				}
+				components:{App}
 			})
 		</script>
 	</body>
