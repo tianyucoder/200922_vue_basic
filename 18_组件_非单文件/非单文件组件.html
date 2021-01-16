@@ -11,11 +11,12 @@
 						1.定义组件：Vue.extend(options)
 						2.注册组件：
 									全局注册：Vue.component('组件名',组件)
-									局部注册
+									局部注册：配置components属性，components:{组件名:组件}
 						3.写组件标签
 		-->
 		<!-- 准备好一个容器-->
 		<div id="root">
+			<Hello></Hello>
 			<School></School>
 		</div>
 
@@ -33,7 +34,16 @@
 							(3).组件的模板结构，要配置在template属性中:
 										(3.1)值为html字符串，而且要用模板字符串。
 										(3.2)模板结构，必须只有一个跟标签。
+					4.所有的组件定义后，必须注册才能使用，注册分为：全局注册、局部注册
+					5.特别注意：
+							(1).School确实是构造函数，但不是我们亲手写的School，是Vue.extend生成的。
+							(2).Vue.extend调用的返回值是VueComponent构造函数，所以new School其实就是在new VueComponent。
+							(3).所谓组件实例，就是VueComponent创建的实例，简称vc。
+									所有Vue实例，就是Vue创建的实例，简称vm
+					6.一个最最最重要的关系：
+							VueComponent继承了Vue，所以Vue.prototype上的属性和方法，vc都能看得见
 			*/
+			
 			const School = Vue.extend({
 				//data中存放组件所需数据
 				data(){ 
@@ -50,16 +60,22 @@
 					</div>
 				`
 			})
+			Vue.prototype.xyz = 1
+			//定义个Hello组件
+			const Hello = Vue.extend({
+				template:`<h2>Hello</h2>`
+			})
 
 			//注册School组件----全局注册
 			// Vue.component('School',School)
 			
 			//定义一个vm，去管理所有的组件
-			new Vue({
+			const vm = new Vue({
 				el:'#root',
-				//注册School组件----局部注册
+				//注册School组件----局部注册----以后工作用的多
 				components:{
-					School
+					School,
+					Hello
 				}
 			})
 		</script>
