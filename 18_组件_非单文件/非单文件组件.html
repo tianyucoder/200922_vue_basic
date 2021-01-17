@@ -15,9 +15,7 @@
 						3.写组件标签
 		-->
 		<!-- 准备好一个容器-->
-		<div id="root">
-			<App></App>
-		</div>
+		<div id="root"></div>
 
 		<script type="text/javascript" >
 			Vue.config.productionTip = false //关闭生产提示
@@ -92,7 +90,8 @@
 			const vm = new Vue({
 				el:'#root',
 				//注册School组件----局部注册----以后工作用的多
-				components:{App}
+				components:{App},
+				template:'<App/>'
 			})
 		</script>
 	</body>
